@@ -41,3 +41,11 @@ And you can delete it
 ```bash
 curl -XDELETE "http://localhost:8000/users/1" 
 ```
+
+## Tests
+
+You can run tests with phpunit
+
+```bash
+docker exec -it server sh /run-tests.sh
+```

@@ -11,7 +11,7 @@ RUN apk --no-cache add \
     php7-bcmath php7-pcntl php7-redis php7-json \
     php7-phar php7-mbstring php7-openssl php7-xml \
     php7-tokenizer php7-dom php7-xmlwriter php7-posix \
-    php7-sockets php7-pdo_mysql php7-ctype php7-iconv
+    php7-sockets php7-pdo_mysql php7-ctype php7-iconv php7-pdo_sqlite
 
 #
 # Composer
@@ -24,8 +24,8 @@ RUN  curl -sS https://getcomposer.org/installer | php \
 #
 COPY . /var/www
 RUN cd /var/www && \
-    composer install -n --prefer-dist --no-dev --no-suggest && \
-    composer dump-autoload -n --no-dev --optimize
+    composer install -n --prefer-dist --no-suggest && \
+    composer dump-autoload -n --optimize
 
 COPY docker/* /
 COPY scripts/* /
