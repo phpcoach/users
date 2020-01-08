@@ -1,0 +1,14 @@
+tactician:
+    default_bus: read
+    commandbus:
+        read:
+            middleware:
+                - tactician.middleware.command_handler
+
+        write:
+            middleware:
+                - tactician.middleware.command_handler
+
+        async_write:
+            middleware:
+                - tactician.middleware.command_handler

@@ -1,0 +1,10 @@
+doctrine:
+    dbal:
+        connections:
+            users:
+                host: '%env(MYSQL_HOST)%'
+                port: '%env(MYSQL_PORT)%'
+                user: '%env(MYSQL_USER)%'
+                password: '%env(MYSQL_PASSWORD)%'
+                dbname: users
+                driver: pdo_mysql

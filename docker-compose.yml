@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+  mysql:
+    image: mysql:5
+    container_name: mysql
+    networks: [main]
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+  server:
+    build: .
+    container_name: server
+    networks: [main]
+    command: ["sh", /server-entrypoint.sh]
+    ports:
+      - 8000:8000
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+
+volumes:
+  mysqldata:
+    driver: local
+
+networks:
+  main:

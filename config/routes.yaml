@@ -1,0 +1,14 @@
+get_user_by_uid:
+    path: /users/{uid}
+    controller: App\Controller\GetUserByUIDController
+    methods: GET
+
+delete_user:
+    path: /users/{uid}
+    controller: App\Controller\DeleteUserController
+    methods: DELETE
+
+put_user:
+  path: /users/{uid}
+  controller: App\Controller\PutUserController
+  methods: PUT
