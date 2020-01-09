@@ -9,16 +9,18 @@ docker-compose up --build
 ```
 
 Once the environment is up and running, you can setup the infrastructure by
-using some prebuilt scripts under docker scope.
+using some prebuilt scripts under docker scope. This will create an empty
+MySQL database and a ready to use Rabbitmq queue for commands.
 
 ```bash
-docker exec -it server sh /setup-mysql.sh
+docker exec -it server sh /setup-environment.sh
 ```
 
-You can clean all the infrastructure by using the script
+You can clean all the infrastructure by using the script. This will delete the
+MySQL database and the RabbiMQ queue.
 
 ```bash
-docker exec -it server sh /clean-mysql.sh
+docker exec -it server sh /clean-environment.sh
 ```
 
 ## Endpoints

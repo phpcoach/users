@@ -7,8 +7,11 @@ tactician:
 
         write:
             middleware:
+                - Domain\Middleware\AsyncCommandsMiddleware
+                - Domain\Middleware\ReturnVoidMiddleware
                 - tactician.middleware.command_handler
 
         async_write:
             middleware:
+                - Domain\Middleware\ReturnVoidMiddleware
                 - tactician.middleware.command_handler

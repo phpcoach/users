@@ -10,18 +10,28 @@ services:
     volumes:
       - mysqldata:/var/lib/mysql
 
+  rabbitmq:
+    image: rabbitmq:3
+    container_name: amqp
+    networks: [main]
+
   server:
     build: .
     container_name: server
     networks: [main]
-    command: ["sh", /server-entrypoint.sh]
+    command: ["sh", "/wait-and-run.sh", "/server.sh"]
     ports:
       - 8000:8000
-    environment:
-      - MYSQL_HOST=mysql
-      - MYSQL_PORT=3306
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
+    env_file:
+      - ./docker-compose/.env
+
+  command_consumer:
+    build: .
+    container_name: command_consumer
+    networks: [main]
+    command: ["sh", "/wait-and-run.sh", "/command-consumer.sh"]
+    env_file:
+      - ./docker-compose/.env
 
 volumes:
   mysqldata:

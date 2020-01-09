@@ -21,11 +21,11 @@ final class DeleteUserController
     /**
      * GetUserByUIDController constructor.
      *
-     * @param CommandBus $bus
+     * @param CommandBus $writeBus
      */
-    public function __construct(CommandBus $bus)
+    public function __construct(CommandBus $writeBus)
     {
-        $this->bus = $bus;
+        $this->bus = $writeBus;
     }
 
     /**

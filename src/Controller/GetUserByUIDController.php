@@ -23,11 +23,11 @@ final class GetUserByUIDController
     /**
      * GetUserByUIDController constructor.
      *
-     * @param CommandBus $bus
+     * @param CommandBus $readBus
      */
-    public function __construct(CommandBus $bus)
+    public function __construct(CommandBus $readBus)
     {
-        $this->bus = $bus;
+        $this->bus = $readBus;
     }
 
     /**

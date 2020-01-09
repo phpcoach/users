@@ -11,12 +11,49 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+    #
+    # External libraries / AMQPLib
+    #
+    PhpAmqpLib\Connection\AMQPStreamConnection:
+        arguments:
+            - '%env(AMQP_HOST)%'
+            - '%env(AMQP_PORT)%'
+            - '%env(AMQP_USER)%'
+            - '%env(AMQP_PASSWORD)%'
+            - '%env(AMQP_VHOST)%'
+
+    PhpAmqpLib\Channel\AMQPChannel:
+        factory:
+            - '@PhpAmqpLib\Connection\AMQPStreamConnection'
+            - channel
+            -
+    #
+    # App
+    #
+
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Console\:
+        resource: '../src/Console'
+        tags: ['console.command']
+
+    #
+    # Infra
+    #
+
     Infra\Doctrine\:
         resource: '../src/Doctrine'
+
+    Infra\AMQP\Async\AMQPAsyncAdapter:
+        arguments:
+            - '@PhpAmqpLib\Channel\AMQPChannel'
+            - '%env(AMQP_QUEUE)%'
+
+    #
+    # Domain
+    #
 
     Domain\QueryHandler\:
         resource: '../src/Domain/QueryHandler'
@@ -28,6 +65,14 @@ services:
         tags:
             - {name: "tactician.handler", typehints: true}
 
+    Domain\:
+        resource: '../src/Domain'
+        exclude: '../src/Domain/{Command,CommandHandler,Query,QueryHandler,Model,Exception}'
+
     Domain\Model\InMemoryUserRepository:
     Domain\Model\UserRepository:
         alias: Infra\Doctrine\Model\DoctrineUserRepository
+
+    Domain\Async\AsyncAdapter:
+        alias: Infra\AMQP\Async\AMQPAsyncAdapter
+
