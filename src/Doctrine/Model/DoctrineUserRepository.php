@@ -102,9 +102,9 @@ class DoctrineUserRepository implements UserRepository
         }
 
         return new User(
-            new UserUID(\strval($data['id'])),
-            \strval($data['name']),
-            \intval($data['age'])
+            new UserUID((string) $data['id']),
+            (string) $data['name'],
+            (int) $data['age']
         );
     }
 
