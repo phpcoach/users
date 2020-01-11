@@ -19,6 +19,7 @@ services:
     build: .
     container_name: server
     networks: [main]
+    image: server
     command: ["sh", "/wait-and-run.sh", "/server.sh"]
     ports:
       - 8000:8000
@@ -29,6 +30,7 @@ services:
     build: .
     container_name: command_consumer
     networks: [main]
+    image: server
     command: ["sh", "/wait-and-run.sh", "/command-consumer.sh"]
     env_file:
       - ./docker-compose/.env
