@@ -19,7 +19,7 @@ services:
     build: .
     container_name: server
     networks: [main]
-    command: ["sh", "/wait-and-run.sh", "/server.sh"]
+    command: ["sh", "/wait-and-run.sh", "/server-entrypoint.sh"]
     ports:
       - 8000:8000
     env_file:
@@ -29,7 +29,7 @@ services:
     build: .
     container_name: command_consumer
     networks: [main]
-    command: ["sh", "/wait-and-run.sh", "/command-consumer.sh"]
+    command: ["sh", "/wait-and-run.sh", "/command-consumer-entrypoint.sh"]
     env_file:
       - ./docker-compose/.env
 
