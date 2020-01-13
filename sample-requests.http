@@ -1,0 +1,17 @@
+### Inserts or updates one User into our Repository.
+PUT http://localhost:8000/users/d5786318-4baa-4c5b-abf2-a902fb3ba331
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "age": "33"
+}
+
+### Gets a user with the given Uid
+GET http://localhost:8000/users/d5786318-4baa-4c5b-abf2-a902fb3ba331
+Content-Type: application/json
+
+### Deletes a user with the given Uid
+DELETE http://localhost:8000/users/d5786318-4baa-4c5b-abf2-a902fb3ba331
+
+###
