@@ -33,16 +33,16 @@ class DoctrineUserRepository implements UserRepository
      */
     public function put(User $user): void
     {
-        $exits = true;
+        $exists = true;
         $userUID = $user->getUID();
         try {
             $this->getByUID($userUID);
         } catch (UserNotFoundException $e) {
-            $exits = false;
+            $exists = false;
         }
 
 
-        if (!$exits) {
+        if (!$exists) {
 
             $this
                 ->connection
