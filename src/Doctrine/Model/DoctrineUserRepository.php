@@ -50,18 +50,16 @@ class DoctrineUserRepository implements UserRepository
                 ->insert('users')
                 ->values(
                     [
-                        'id' => '?',
-                        'name' => '?',
-                        'age' => '?',
+                        'id' => ':id',
+                        'name' => ':name',
+                        'age' => ':age',
                     ]
                 )
-                ->setParameters(
-                    [
-                        $userUID->getId(),
-                        $user->getName(),
-                        $user->getAge(),
-                    ]
-                )
+                ->setParameters([
+                    'id' => $userUID->getId(),
+                    'name' => $user->getName(),
+                    'age' => $user->getAge()
+                ])
                 ->execute();
 
             return;
