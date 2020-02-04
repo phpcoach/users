@@ -113,14 +113,16 @@ class DoctrineUserRepository implements UserRepository
      */
     public function delete(UserUID $userUid): void
     {
-        $this->getByUID($userUid);
-
-        $this
+        $result = $this
             ->connection
             ->createQueryBuilder()
             ->delete('users')
             ->where('id = :id')
             ->setParameter('id', $userUid->getId())
             ->execute();
+
+        if (0 === $result) {
+            throw new UserNotFoundException('User not found.');
+        }
     }
 }
