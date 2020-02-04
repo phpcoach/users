@@ -29,7 +29,7 @@ You can use some endpoints exposed under the port `8000`. For example, you can
 put a user resource.
 
 ```bash
-curl -XPUT "http://localhost:8000/users/1" -d'{"name":"Marc", "age":34}'
+curl -XPUT "http://localhost:8000/users/1" -H "Content-Type: application/json" -d'{"name":"Marc", "age":34}'
 ```
 
 You can get the resource using the same resource path
